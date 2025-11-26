@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background:  #74A690;
+  --foreground: #3a3a3a;
+  --card: #ffffff;
+  --card-foreground: #3a3a3a;
+  --primary: #5d8c73;
+  --primary-foreground: #faf7f2;
+  --secondary: #f4e2c8;
+  --secondary-foreground: #3a3a3a;
+  --muted: #f2f2f2;
+  --muted-foreground: #8b8b8b;
+  --accent: #5d8c73;
+  --accent-foreground: #faf7f2;
+  --border: #e8e8e8;
+  --input: #f4e2c8;
+  --ring: #5d8c73;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #1a1a1a;
+  --foreground: #f0f0f0;
+  --card: #2a2a2a;
+  --card-foreground: #f0f0f0;
+  --primary: #7a9d89;
+  --primary-foreground: #1a1a1a;
+  --secondary: #3a3a3a;
+  --secondary-foreground: #f0f0f0;
+  --muted: #3a3a3a;
+  --muted-foreground: #a0a0a0;
+  --accent: #7a9d89;
+  --accent-foreground: #1a1a1a;
+  --border: #404040;
+  --input: #3a3a3a;
+  --ring: #7a9d89;
+}
+
+@theme inline {
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --font-sans: "helvetica-lt-pro", Helvetica;
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--accent);
+  --color-destructive-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--primary);
+  --color-chart-2: var(--primary);
+  --color-chart-3: var(--primary);
+  --color-chart-4: var(--primary);
+  --color-chart-5: var(--primary);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--primary);
+  --color-sidebar-foreground: var(--primary-foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--primary);
+  --color-sidebar-accent-foreground: var(--primary-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .regime-container {
+    @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .regime-button {
+    @apply px-6 py-3 rounded-lg bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity duration-200;
+  }
+
+  .regime-button-outline {
+    @apply px-6 py-3 rounded-lg border-2 border-accent text-accent bg-transparent hover:bg-accent/5 transition-colors duration-200;
+  }
+
+  .regime-card {
+    @apply bg-card rounded-lg p-6 shadow-sm border border-border;
+  }
+
+  .regime-section-title {
+    @apply text-4xl md:text-5xl font-thin text-foreground mb-2;
+  }
+
+  .regime-section-subtitle {
+    @apply text-lg text-muted-foreground mb-8;
+  }
+}

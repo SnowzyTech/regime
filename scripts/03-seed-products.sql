@@ -1,0 +1,146 @@
+-- Seed sample products for REGIME
+
+INSERT INTO products (
+  title,
+  description,
+  price,
+  category,
+  product_type,
+  skin_concern,
+  sku,
+  stock,
+  images,
+  ingredients,
+  application,
+  sizes
+) VALUES
+-- Cleansers
+(
+  'Gentle Hydrating Cleanser',
+  'A sulfate-free cleanser that removes makeup and impurities while maintaining skin moisture balance. Ideal for sensitive and dry skin types.',
+  45.00,
+  'Cleansers',
+  'Face Cleanser',
+  'Dryness, Sensitivity',
+  'SKU-GHC-001',
+  150,
+  ARRAY['https://via.placeholder.com/500?text=Hydrating+Cleanser'],
+  ARRAY['Chamomile', 'Glycerin', 'Aloe Vera'],
+  'Use morning and evening. Apply to damp skin, massage gently, rinse with water.',
+  ARRAY['50ml', '100ml', '200ml']
+),
+(
+  'Charcoal Detox Cleanser',
+  'Deep-cleansing formula with activated charcoal to remove excess oil and unclog pores. Perfect for oily and acne-prone skin.',
+  52.00,
+  'Cleansers',
+  'Face Cleanser',
+  'Acne, Oiliness',
+  'SKU-CDC-002',
+  120,
+  ARRAY['https://via.placeholder.com/500?text=Charcoal+Cleanser'],
+  ARRAY['Activated Charcoal', 'Salicylic Acid', 'Tea Tree Oil'],
+  'Use morning and evening. Apply to damp skin, massage gently, rinse thoroughly.',
+  ARRAY['50ml', '100ml', '200ml']
+),
+-- Serums
+(
+  'Vitamin C Brightening Serum',
+  'Potent antioxidant serum that brightens skin, reduces dark spots, and improves overall radiance. Contains 20% Vitamin C.',
+  68.00,
+  'Serums',
+  'Face Serum',
+  'Dullness, Dark Spots',
+  'SKU-VCS-003',
+  100,
+  ARRAY['https://via.placeholder.com/500?text=Vitamin+C+Serum'],
+  ARRAY['Vitamin C (L-Ascorbic Acid)', 'Hyaluronic Acid', 'Ferulic Acid'],
+  'Apply a few drops to clean skin before moisturizer. Use in morning routine for best results.',
+  ARRAY['30ml']
+),
+(
+  'Hyaluronic Acid Hydration Serum',
+  'Multi-weight hyaluronic acid serum that provides intensive hydration and plumps the skin. Suitable for all skin types.',
+  55.00,
+  'Serums',
+  'Face Serum',
+  'Dehydration, Fine Lines',
+  'SKU-HAS-004',
+  140,
+  ARRAY['https://via.placeholder.com/500?text=Hyaluronic+Serum'],
+  ARRAY['Hyaluronic Acid (Multiple Weights)', 'Glycerin', 'Niacinamide'],
+  'Apply to damp skin. Layer under moisturizer for enhanced hydration.',
+  ARRAY['30ml', '50ml']
+),
+(
+  'Niacinamide + Zinc Control Serum',
+  'Balancing serum that regulates sebum production, minimizes pores, and strengthens skin barrier. Great for oily and combination skin.',
+  58.00,
+  'Serums',
+  'Face Serum',
+  'Large Pores, Oiliness',
+  'SKU-NZS-005',
+  110,
+  ARRAY['https://via.placeholder.com/500?text=Niacinamide+Serum'],
+  ARRAY['Niacinamide (10%)', 'Zinc', 'Salicylic Acid'],
+  'Apply morning and evening to clean skin before moisturizing.',
+  ARRAY['30ml']
+),
+-- Moisturizers
+(
+  'Lightweight Hydrating Moisturizer',
+  'Fast-absorbing gel-cream formula that hydrates without feeling heavy. Perfect for oily and combination skin.',
+  48.00,
+  'Moisturizers',
+  'Face Moisturizer',
+  'Oiliness, Congestion',
+  'SKU-LHM-006',
+  130,
+  ARRAY['https://via.placeholder.com/500?text=Lightweight+Moisturizer'],
+  ARRAY['Hyaluronic Acid', 'Green Tea Extract', 'Niacinamide'],
+  'Apply to clean skin morning and evening. Use sparingly as a little goes a long way.',
+  ARRAY['50ml', '100ml']
+),
+(
+  'Rich Nourishing Cream',
+  'Luxurious cream enriched with botanical oils and peptides. Ideal for dry and mature skin.',
+  72.00,
+  'Moisturizers',
+  'Face Moisturizer',
+  'Dryness, Aging',
+  'SKU-RNC-007',
+  95,
+  ARRAY['https://via.placeholder.com/500?text=Rich+Cream'],
+  ARRAY['Ceramides', 'Peptides', 'Rose Hip Oil', 'Retinol'],
+  'Apply to clean skin in upward motions. Use morning and evening.',
+  ARRAY['50ml', '100ml']
+),
+-- Masks
+(
+  'Purifying Clay Mask',
+  'Deep-cleansing mask with kaolin and bentonite clay. Removes impurities and oil buildup from pores.',
+  42.00,
+  'Masks',
+  'Face Mask',
+  'Acne, Oiliness, Pores',
+  'SKU-PCM-008',
+  160,
+  ARRAY['https://via.placeholder.com/500?text=Clay+Mask'],
+  ARRAY['Kaolin Clay', 'Bentonite Clay', 'Charcoal', 'Tea Tree Oil'],
+  'Apply thin layer to face, avoid eye area. Leave 10-15 minutes, rinse with lukewarm water.',
+  ARRAY['100ml']
+),
+(
+  'Hydrating Sheet Mask',
+  'Single-use hydrating mask soaked in serum. Provides instant moisture boost and glowing skin.',
+  8.00,
+  'Masks',
+  'Sheet Mask',
+  'Dehydration, Dullness',
+  'SKU-HSM-009',
+  500,
+  ARRAY['https://via.placeholder.com/500?text=Sheet+Mask'],
+  ARRAY['Hyaluronic Acid', 'Vitamin E', 'Aloe Vera'],
+  'Apply to clean face for 15-20 minutes. Remove and pat excess serum into skin.',
+  ARRAY['Single Sheet (25ml)']
+);
