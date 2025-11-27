@@ -28,11 +28,11 @@ export default function FAQPage() {
       answer:
         "Most customers notice visible improvements within 4-6 weeks of consistent use. For best results, use morning and evening as directed and maintain the full routine.",
     },
-    {
-      question: "Do you offer international shipping?",
-      answer:
-        "Yes, we ship to 50+ countries. International orders typically arrive within 10-14 business days. Shipping costs and delivery times vary by location.",
-    },
+    // {
+    //   question: "Do you offer international shipping?",
+    //   answer:
+    //     "Yes, we ship to 50+ countries. International orders typically arrive within 10-14 business days. Shipping costs and delivery times vary by location.",
+    // },
     {
       question: "What is your return policy?",
       answer:
@@ -46,10 +46,10 @@ export default function FAQPage() {
   ]
 
   return (
-    <div className="pt-32 pb-24 bg-background min-h-screen">
+    <div className="pt-32 pb-24 bg-primary-foreground min-h-screen">
       <div className="regime-container max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-16 text-center">
-          <h1 className="regime-section-title mb-4">Frequently Asked Questions</h1>
+          <h1 className="regime-section-title mb-4 font-mono font-bold">Frequently Asked Questions</h1>
           <p className="regime-section-subtitle">Everything you need to know about REGIME</p>
         </motion.div>
 
@@ -64,9 +64,9 @@ export default function FAQPage() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full regime-card text-left flex items-center justify-between hover:shadow-md transition-shadow"
+                className="w-full regime-card text-left flex items-center bg-background justify-between hover:shadow-md transition-shadow"
               >
-                <span className="font-semibold text-lg">{faq.question}</span>
+                <span className="text-foreground text-lg font-mono font-bold ">{faq.question}</span>
                 <ChevronDown
                   size={24}
                   className={`transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}

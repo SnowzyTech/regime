@@ -230,7 +230,7 @@ export default function CheckoutPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 rounded-lg bg-input border ${
+                    className={`w-full px-4 py-3 font-mono rounded-lg bg-input border ${
                       errors.email ? "border-destructive" : "border-border"
                     } focus:outline-none focus:ring-2 focus:ring-accent`}
                   />
@@ -246,7 +246,7 @@ export default function CheckoutPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 rounded-lg bg-input border ${
+                      className={`w-full px-4 py-3 font-mono rounded-lg bg-input border ${
                         errors.name ? "border-destructive" : "border-border"
                       } focus:outline-none focus:ring-2 focus:ring-accent`}
                     />
@@ -261,7 +261,7 @@ export default function CheckoutPage() {
                       onChange={handleChange}
                       required
                       placeholder="+234 xxx xxx xxxx"
-                      className={`w-full px-4 py-3 font-mono rounded-lg bg-input border ${
+                      className={`w-full px-4 py-3  font-mono rounded-lg bg-input border ${
                         errors.phone ? "border-destructive" : "border-border"
                       } focus:outline-none focus:ring-2 focus:ring-accent`}
                     />
@@ -278,7 +278,7 @@ export default function CheckoutPage() {
                     onChange={handleChange}
                     required
                     placeholder="House number and street name"
-                    className={`w-full px-4 py-3 rounded-lg bg-input border ${
+                    className={`w-full px-4 font-mono py-3 rounded-lg bg-input border ${
                       errors.street ? "border-destructive" : "border-border"
                     } focus:outline-none focus:ring-2 focus:ring-accent`}
                   />
@@ -294,7 +294,7 @@ export default function CheckoutPage() {
                       value={formData.city}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 rounded-lg bg-input border ${
+                      className={`w-full px-4 font-mono py-3 rounded-lg bg-input border ${
                         errors.city ? "border-destructive" : "border-border"
                       } focus:outline-none focus:ring-2 focus:ring-accent`}
                     />
@@ -308,7 +308,7 @@ export default function CheckoutPage() {
                       value={formData.state}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 rounded-lg bg-input border ${
+                      className={`w-full px-4 py-3 font-mono rounded-lg bg-input border ${
                         errors.state ? "border-destructive" : "border-border"
                       } focus:outline-none focus:ring-2 focus:ring-accent`}
                     />
@@ -324,7 +324,7 @@ export default function CheckoutPage() {
                     value={formData.country}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 rounded-lg bg-input border ${
+                    className={`w-full px-4 py-3 font-mono rounded-lg bg-input border ${
                       errors.country ? "border-destructive" : "border-border"
                     } focus:outline-none focus:ring-2 focus:ring-accent`}
                   />

@@ -1,8 +1,9 @@
-import { streamText } from "ai"
+import { streamText, createGateway } from "ai"
 import { createAdminClient } from "@/lib/supabase/admin"
 
-// This route uses Vercel AI Gateway - requires AI_GATEWAY_API_KEY environment variable
-// Get your key from: Vercel Dashboard > Your Project > Settings > AI Gateway > API Keys
+const gateway = createGateway({
+  apiKey: process.env.AI_GATEWAY_API_KEY_PROJECT2,
+})
 
 export async function POST(req: Request) {
   try {
@@ -133,7 +134,7 @@ GUIDELINES:
 - Be enthusiastic about skincare and helping customers achieve healthy skin`
 
     const result = streamText({
-      model: "openai/gpt-3.5-turbo",
+      model: gateway("openai/gpt-3.5-turbo"),
       system: systemPrompt,
       messages,
     })

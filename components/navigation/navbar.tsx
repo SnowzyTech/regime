@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ShoppingCart, User, Menu, X, LogOut } from "lucide-react"
+import { ShoppingBag, User, Menu, X, LogOut } from "lucide-react"
 import { useCart, subscribeToCart } from "@/hooks/use-cart"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter, usePathname } from "next/navigation"
@@ -19,6 +19,8 @@ export default function Navbar() {
   const { cart } = useCart()
   const router = useRouter()
   const pathname = usePathname()
+
+  const isHomePage = pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,10 +91,19 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-primary-foreground shadow-sm" : "bg-transparent"}`}
+      className={cn(
+        "fixed w-full top-0 z-50 transition-all duration-300",
+        isHomePage ? "bg-transparent" : isScrolled ? "bg-primary-foreground shadow-sm" : "bg-transparent",
+      )}
     >
       <div className="regime-container flex items-center justify-between h-20">
-        <Link href="/" className="text-2xl font-light tracking-wider">
+        <Link
+          href="/"
+          className={cn(
+            "text-2xl font-light tracking-wider transition-colors",
+            isHomePage ? "text-white" : "text-foreground",
+          )}
+        >
           REGIME.
         </Link>
 
@@ -104,9 +115,13 @@ export default function Navbar() {
               href={link.href}
               className={cn(
                 "px-4 py-2 rounded-md transition-colors text-sm font-medium",
-                pathname === link.href
-                  ? "bg-accent text-accent-foreground shadow-sm"
-                  : "text-foreground hover:bg-accent hover:text-accent-foreground",
+                isHomePage
+                  ? pathname === link.href
+                    ? "bg-white/20 text-white"
+                    : "text-white hover:bg-white/10"
+                  : pathname === link.href
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "text-foreground hover:bg-accent hover:text-accent-foreground",
               )}
             >
               {link.label}
@@ -118,9 +133,18 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <Link
             href="/cart"
-            className="relative p-2 hover:bg-accent hover:text-accent-foreground rounded-full transition-colors"
+            className={cn(
+              "relative p-2 rounded-full transition-colors",
+              isHomePage ? "hover:bg-white/10" : "hover:bg-accent hover:text-accent-foreground",
+            )}
           >
-            <ShoppingCart size={24} className="text-foreground hover:text-accent-foreground transition-colors" />
+            <ShoppingBag
+              size={24}
+              className={cn(
+                "transition-colors",
+                isHomePage ? "text-white" : "text-foreground hover:text-accent-foreground",
+              )}
+            />
             {cartItemCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium">
                 {cartItemCount}
@@ -131,10 +155,16 @@ export default function Navbar() {
           <div className="relative hidden md:block">
             <button
               onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-              className="p-2 hover:bg-accent hover:text-accent-foreground rounded-full transition-colors"
+              className={cn(
+                "p-2 rounded-full transition-colors",
+                isHomePage ? "hover:bg-white/10" : "hover:bg-accent hover:text-accent-foreground",
+              )}
               title={user ? userName : "Sign In"}
             >
-              <User size={24} className="text-foreground hover:text-accent-foreground" />
+              <User
+                size={24}
+                className={cn(isHomePage ? "text-white" : "text-foreground hover:text-accent-foreground")}
+              />
             </button>
 
             {isUserDropdownOpen && (
@@ -179,7 +209,10 @@ export default function Navbar() {
             )}
           </div>
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden p-2">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={cn("md:hidden p-2", isHomePage ? "text-white" : "text-foreground")}
+          >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
