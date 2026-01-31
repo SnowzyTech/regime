@@ -2,6 +2,7 @@ import Hero from "@/components/sections/hero"
 import FeaturedProducts from "@/components/sections/featured-products"
 import Community from "@/components/sections/community"
 import Philosophy from "@/components/sections/philosophy"
+import ResultsSection from "@/components/sections/results"
 import NewsletterCTA from "@/components/sections/newsletter-cta"
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function Home() {
       <FeaturedProducts />
       <Philosophy />
       <Community />
+      <ResultsSection />
       <NewsletterCTA />
     </main>
   )

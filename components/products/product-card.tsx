@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { useCart } from "@/hooks/use-cart"
 import { useState } from "react"
 
+
 interface ProductCardProps {
   product: {
     id: string
@@ -32,8 +33,9 @@ export default function ProductCard({ product, textColor }: ProductCardProps) {
     router.push(`/shop/${product.id}`)
   }
 
-  // In a real app, this would come from product.images[1]
-  const hoverImage = product.images[1] || "/smiling-african-woman-with-clear-skin.jpg"
+  // Use existing database images - they should always be present
+  const mainImage = product.images?.[0] || "/placeholder.svg"
+  const hoverImage = product.images?.[1] || product.images?.[0] || "/placeholder.svg"
 
   // We assume a 10-20% markup for original price visualization
   const originalPrice = product.originalPrice || Math.round(product.price * 1.15)
@@ -49,7 +51,7 @@ export default function ProductCard({ product, textColor }: ProductCardProps) {
         <div className="relative overflow-hidden aspect-[3/4] bg-[#f5f2eb] rounded-none mb-4 group-hover:shadow-lg transition-shadow">
           {/* Main Product Image */}
           <Image
-            src={product.images?.[0] || "/placeholder.svg?height=600&width=450"}
+            src={mainImage || "/placeholder.svg?height=600&width=450"}
             alt={product.title}
             fill
             className="object-cover object-center transition-opacity duration-500 group-hover:opacity-0"

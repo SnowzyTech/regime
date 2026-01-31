@@ -181,6 +181,9 @@ export function ProductFormDialog({ product, isOpen, onOpenChange, onSuccess, mo
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label>Product Images</Label>
+            <p className="text-xs text-muted-foreground mb-2">
+              First image = Main product image | Second image = Hover image (shows when users hover over the product)
+            </p>
             <div className="mt-2 space-y-3">
               {images.length > 0 && (
                 <div className="grid grid-cols-3 gap-3">
@@ -192,6 +195,9 @@ export function ProductFormDialog({ product, isOpen, onOpenChange, onSuccess, mo
                         fill
                         className="object-cover"
                       />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs py-1 px-2 text-center">
+                        {index === 0 ? "Main Image" : index === 1 ? "Hover Image" : `Image ${index + 1}`}
+                      </div>
                       <button
                         type="button"
                         onClick={() => handleRemoveImage(imageUrl)}

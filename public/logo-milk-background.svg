@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <rect width="500" height="500" fill="#F5F1E8"/>
+  
+  <!-- Text "THE REGIMEN" -->
+  <text x="50" y="280" font-family="Arial, sans-serif" font-size="48" font-weight="300" fill="#4A6B63" letter-spacing="2">
+    THE REGIMEN
+  </text>
+  
+  <!-- Top left circle -->
+  <circle cx="250" cy="180" r="30" fill="none" stroke="#4A6B63" stroke-width="3"/>
+  
+  <!-- Top right circle -->
+  <circle cx="330" cy="180" r="30" fill="none" stroke="#4A6B63" stroke-width="3"/>
+  
+  <!-- Bottom left circle (larger) -->
+  <circle cx="260" cy="280" r="50" fill="none" stroke="#4A6B63" stroke-width="3"/>
+  
+  <!-- Bottom right circle (larger) -->
+  <circle cx="360" cy="280" r="60" fill="none" stroke="#4A6B63" stroke-width="3"/>
+</svg>

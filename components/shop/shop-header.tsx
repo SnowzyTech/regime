@@ -9,7 +9,7 @@ export default function ShopHeader() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="mb-8 md:mb-16 pt-4 md:pt-6"
     >
-      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4 md:mb-6">
+      <div className="flex items-center gap-2 text-sm text-primary-foreground mb-4 md:mb-6">
         <span>Home</span>
         <span>/</span>
         <span>Shop</span>

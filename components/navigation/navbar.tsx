@@ -2,17 +2,20 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ShoppingBag, User, Menu, X, LogOut } from "lucide-react"
+import Image from "next/image"
+import { ShoppingBag, User, Menu, X, LogOut, ChevronDown } from "lucide-react"
 import { useCart, subscribeToCart } from "@/hooks/use-cart"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter, usePathname } from "next/navigation"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
+import { CATEGORIES, PRODUCT_TYPES, SKIN_CONCERNS } from "@/lib/constants"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false)
+  const [openShopDropdown, setOpenShopDropdown] = useState<string | null>(null)
   const [user, setUser] = useState<any>(null)
   const [userName, setUserName] = useState("")
   const [cartItemCount, setCartItemCount] = useState(0)
@@ -99,12 +102,16 @@ export default function Navbar() {
       <div className="regime-container flex items-center justify-between h-20">
         <Link
           href="/"
-          className={cn(
-            "text-2xl font-light tracking-wider transition-colors",
-            isHomePage ? "text-white" : "text-foreground",
-          )}
+          className="relative w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80"
         >
-          REGIME.
+          <Image
+            src="/logo-milk-background.svg"
+            alt="REGIME Logo"
+            width={48}
+            height={38}
+            className="w-full h-full rounded-4xl"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -225,9 +232,15 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-2xl font-light tracking-wider text-foreground"
+              className="relative w-12 h-12 flex items-center justify-center transition-opacity hover:opacity-80"
             >
-              REGIME.
+              <Image
+                src="/logo-milk-background.svg"
+                alt="REGIME Logo"
+                width={48}
+                height={48}
+                className="w-full h-full"
+              />
             </Link>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -239,21 +252,164 @@ export default function Navbar() {
 
           {/* Mobile Menu Content */}
           <div className="flex flex-col flex-1 p-6 gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  "text-lg font-medium py-4 px-4 rounded-lg transition-colors",
-                  pathname === link.href
-                    ? "bg-accent text-accent-foreground shadow-sm"
-                    : "text-foreground hover:bg-accent hover:text-accent-foreground",
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.href === "/shop") {
+                return (
+                  <div key={link.href} className="flex flex-col gap-2">
+                    <button
+                      onClick={() => setOpenShopDropdown(openShopDropdown ? null : "shop")}
+                      className={cn(
+                        "text-lg font-medium py-4 px-4 rounded-lg transition-colors flex items-center justify-between",
+                        openShopDropdown === "shop"
+                          ? "bg-accent text-accent-foreground shadow-sm"
+                          : "text-foreground hover:bg-accent hover:text-accent-foreground",
+                      )}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform ${openShopDropdown === "shop" ? "rotate-180" : ""}`}
+                      />
+                    </button>
+
+                    {openShopDropdown && (
+                      <div className="flex flex-col gap-2 pl-4 bg-secondary/30 rounded-lg p-3">
+                        {/* Show filter buttons when shop is the open state */}
+                        {openShopDropdown === "shop" && (
+                          <>
+                            {/* Categories */}
+                            <button
+                              onClick={() => setOpenShopDropdown("categories")}
+                              className="w-full flex items-center justify-between py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors font-medium"
+                            >
+                              Categories
+                              <ChevronDown size={16} />
+                            </button>
+
+                            {/* Product Types */}
+                            <button
+                              onClick={() => setOpenShopDropdown("productTypes")}
+                              className="w-full flex items-center justify-between py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors font-medium"
+                            >
+                              Product Types
+                              <ChevronDown size={16} />
+                            </button>
+
+                            {/* Skin Concerns */}
+                            <button
+                              onClick={() => setOpenShopDropdown("skinConcerns")}
+                              className="w-full flex items-center justify-between py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors font-medium"
+                            >
+                              Skin Concerns
+                              <ChevronDown size={16} />
+                            </button>
+                          </>
+                        )}
+
+                        {/* Categories List */}
+                        {openShopDropdown === "categories" && (
+                          <>
+                            <button
+                              onClick={() => setOpenShopDropdown("shop")}
+                              className="w-full flex items-center gap-2 py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors font-medium text-sm mb-2"
+                            >
+                              <ChevronDown size={16} className="rotate-90" />
+                              Back
+                            </button>
+                            <div className="flex flex-col gap-1">
+                              {CATEGORIES.map((category) => (
+                                <Link
+                                  key={category}
+                                  href={`/shop?category=${encodeURIComponent(category)}`}
+                                  onClick={() => {
+                                    setIsMobileMenuOpen(false)
+                                    setOpenShopDropdown(null)
+                                  }}
+                                  className="py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors text-sm"
+                                >
+                                  {category}
+                                </Link>
+                              ))}
+                            </div>
+                          </>
+                        )}
+
+                        {/* Product Types List */}
+                        {openShopDropdown === "productTypes" && (
+                          <>
+                            <button
+                              onClick={() => setOpenShopDropdown("shop")}
+                              className="w-full flex items-center gap-2 py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors font-medium text-sm mb-2"
+                            >
+                              <ChevronDown size={16} className="rotate-90" />
+                              Back
+                            </button>
+                            <div className="flex flex-col gap-1">
+                              {PRODUCT_TYPES.map((type) => (
+                                <Link
+                                  key={type}
+                                  href={`/shop?productType=${encodeURIComponent(type)}`}
+                                  onClick={() => {
+                                    setIsMobileMenuOpen(false)
+                                    setOpenShopDropdown(null)
+                                  }}
+                                  className="py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors text-sm"
+                                >
+                                  {type}
+                                </Link>
+                              ))}
+                            </div>
+                          </>
+                        )}
+
+                        {/* Skin Concerns List */}
+                        {openShopDropdown === "skinConcerns" && (
+                          <>
+                            <button
+                              onClick={() => setOpenShopDropdown("shop")}
+                              className="w-full flex items-center gap-2 py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors font-medium text-sm mb-2"
+                            >
+                              <ChevronDown size={16} className="rotate-90" />
+                              Back
+                            </button>
+                            <div className="flex flex-col gap-1">
+                              {SKIN_CONCERNS.map((concern) => (
+                                <Link
+                                  key={concern}
+                                  href={`/shop?skinConcern=${encodeURIComponent(concern)}`}
+                                  onClick={() => {
+                                    setIsMobileMenuOpen(false)
+                                    setOpenShopDropdown(null)
+                                  }}
+                                  className="py-2 px-3 text-foreground hover:bg-accent/10 rounded transition-colors text-sm"
+                                >
+                                  {concern}
+                                </Link>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    "text-lg font-medium py-4 px-4 rounded-lg transition-colors",
+                    pathname === link.href
+                      ? "bg-accent text-accent-foreground shadow-sm"
+                      : "text-foreground hover:bg-accent hover:text-accent-foreground",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
 
             <div className="border-t border-border pt-4 mt-4">
               {user ? (

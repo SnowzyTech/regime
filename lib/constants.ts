@@ -1,4 +1,19 @@
-export const CATEGORIES = ["Cleansers", "Serums", "Moisturizers", "Masks", "Treatments", "Sun Protection", "Sets"]
+export const CATEGORIES = [
+  "Acne Prone/Oily Skin",
+  "Acne Solutions",
+  "Anti Aging",
+  "Facial Care Hyperpigmentation",
+  "Body Care Hyperpigmentation",
+  "Body Care",
+  "Face Care",
+  "Moisturizers",
+  "Dry Skin",
+  "Our Best Sellers",
+  "Sensitive Skin",
+  "Sun Defence",
+  "Skin Brighteners",
+  "Psoriasis/Dry Flaky Skin",
+]
 
 export const PRODUCT_TYPES = [
   "Face Cleanser",
@@ -12,21 +27,26 @@ export const PRODUCT_TYPES = [
   "SPF",
   "Face Oil",
   "Mist",
+  "Body Lotion",
+  "Body Cream",
+  "Treatment",
 ]
 
 export const SKIN_CONCERNS = [
   "Acne",
   "Aging",
-  "Congestion",
-  "Dark Spots",
-  "Dehydration",
+  "Oiliness",
   "Dryness",
+  "Sensitivity",
+  "Dehydration",
+  "Dark Spots",
+  "Hyperpigmentation",
   "Dullness",
   "Fine Lines",
   "Large Pores",
-  "Oiliness",
-  "Pigmentation",
+  "Congestion",
   "Redness",
-  "Sensitivity",
   "Uneven Texture",
+  "Psoriasis",
+  "Brightening",
 ]

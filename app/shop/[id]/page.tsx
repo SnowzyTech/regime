@@ -10,6 +10,7 @@ import { ShoppingCart, Plus, Minus, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import ProductTestimonials from "@/components/product-testimonials"
 import { getTestimonialsByProduct, type Testimonial } from "@/app/actions/testimonials"
+import { generateProductImages, extractProductIndex } from "@/lib/utils/image-helper"
 
 interface Product {
   id: string
@@ -46,14 +47,41 @@ function RelatedProductsSection({ currentProduct, allProducts }: { currentProduc
                   src={product.images[0] || "/placeholder.svg"}
                   alt={product.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-opacity duration-500 group-hover:opacity-0"
                 />
-              </div>
-              <div className="flex justify-between items-start px-1">
-                <div>
-                  <h3 className="font-bold text-foreground/80 text-lg uppercase tracking-wide mb-1">{product.title}</h3>
+                {product.images[1] && (
+                  <Image
+                    src={product.images[1] || "/placeholder.svg"}
+                    alt={`${product.title} hover`}
+                    fill
+                    className="object-cover absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                )}
+                {/* Select Button - Appears on Hover (Desktop only) */}
+                <div className="absolute bottom-0 left-0 right-0 p-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block z-10">
+                  <button
+                    className="w-full font-mono font-bold py-4 bg-primary-foreground text-foreground hover:bg-primary-foreground/90 transition-colors text-center uppercase tracking-wider text-sm rounded-none"
+                  >
+                    Select
+                  </button>
                 </div>
-                <p className="text-foreground/80 text-lg font-mono font-bold">₦{product.price.toLocaleString()}</p>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex justify-between items-start px-1">
+                  <div>
+                    <h3 className="font-bold text-foreground/80 text-sm md:text-base lg:text-lg uppercase tracking-wide mb-1">{product.title}</h3>
+                  </div>
+                  <p className="text-foreground/80 text-sm md:text-base lg:text-lg font-mono font-bold">₦{product.price.toLocaleString()}</p>
+                </div>
+                {/* Select Button - Visible on mobile/tablet, hidden on desktop */}
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                  }}
+                  className="md:hidden border border-foreground/50 hover:shadow-2xl shadow cursor-pointer w-full font-mono font-bold py-2 bg-primary-foreground text-foreground hover:bg-primary-foreground/90 transition-colors text-center uppercase tracking-wider text-sm rounded-none"
+                >
+                  Select
+                </button>
               </div>
             </Link>
           ))}
@@ -107,11 +135,22 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
   }
 
   const handleAddToCart = () => {
-    addToCart(product.id, quantity, selectedSize, product.title, product.price, product.images[0])
+    // Use images array which is computed from product.images or generated dynamically
+    const cartImage = (product.images && product.images.length > 0) ? product.images[0] : generateProductImages(extractProductIndex(product.id, product.title))[0]
+    addToCart(product.id, quantity, selectedSize, product.title, product.price, cartImage)
     toast.success(`${product.title} - ${quantity} item(s) added to cart!`)
   }
 
   const sizes = ["30ml / 10 fl oz", "50ml / 1.7 fl oz", "100ml / 3.4 fl oz"]
+
+  // Compute images: use database images or generate from product title
+  const images = (() => {
+    if (product.images && product.images.length > 0) {
+      return product.images
+    }
+    const imageIndex = extractProductIndex(product.id, product.title)
+    return generateProductImages(imageIndex)
+  })()
 
   return (
     <div className="pt-32 bg-primary-foreground">
@@ -141,20 +180,21 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
           >
             <div className="mb-6 rounded-lg overflow-hidden bg-secondary aspect-square">
               <Image
-                src={product.images[selectedImage] || "/placeholder.svg?height=600&width=600"}
+                src={images[selectedImage] || "/placeholder.svg?height=600&width=600"}
                 alt={product.title}
                 width={600}
                 height={600}
                 className="w-full h-full object-cover"
+                priority
               />
             </div>
-            {product.images.length > 1 && (
-              <div className="flex gap-3">
+            {product.images && product.images.length > 0 && (
+              <div className="grid grid-cols-4 gap-3 md:gap-4">
                 {product.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-24 h-24 rounded-lg overflow-hidden border-2 transition-colors ${
+                    className={`w-full aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
                       selectedImage === index ? "border-accent" : "border-border"
                     }`}
                   >
@@ -277,7 +317,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
                 </motion.div>
               </div>
 
-              <div className="border-b border-foreground/60">
+              <div className="border-b border-foreground/80">
                 <button
                   onClick={() => setActiveTab(activeTab === "application" ? "" : "application")}
                   className="w-full py-4 flex items-center justify-between hover:text-accent transition-colors"

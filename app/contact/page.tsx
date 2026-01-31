@@ -181,8 +181,8 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-semibold mb-1">Address</h4>
-                    <p className="text-muted-foreground">123 Wellness Avenue, Suite 400</p>
-                    <p className="text-muted-foreground">Beverly Hills, CA 90210</p>
+                    <p className="text-muted-foreground">132 Ogbatuluenyi drive federal housing estate </p>
+                    <p className="text-muted-foreground">33 Onitsha, Anambra</p>
                   </div>
                 </div>
 
@@ -191,7 +191,7 @@ export default function ContactPage() {
                   <Phone className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-semibold mb-1">Phone</h4>
-                    <p className="text-muted-foreground">(310) 555-0101</p>
+                    <p className="text-muted-foreground">08038905589</p>
                   </div>
                 </div>
 
@@ -200,7 +200,7 @@ export default function ContactPage() {
                   <Mail className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-muted-foreground">concierge@regimederm.com</p>
+                    <p className="text-muted-foreground">support@regime.com</p>
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@ export default function ContactPage() {
               <div className="w-full h-80 bg-muted rounded-lg border border-border flex items-center justify-center">
                 <div className="text-center">
                   <p className="text-muted-foreground">Google Map Integration</p>
-                  <p className="text-xs text-muted-foreground mt-2">123 Wellness Avenue, Beverly Hills, CA</p>
+                  <p className="text-xs text-muted-foreground mt-2">132 Ogbatuluenyi drive federal housing estate 33 Onitsha, Anambra</p>
                 </div>
               </div>
             </motion.div>
